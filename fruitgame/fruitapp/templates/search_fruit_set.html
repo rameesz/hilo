@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Fruit Sets</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Custom premium design styles */
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .navbar {
+            background-color: #343a40;
+        }
+        .navbar-brand {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+        h1, h2 {
+            color: #343a40;
+        }
+        .btn-group button {
+            min-width: 120px;
+            margin: 5px;
+        }
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card-body {
+            padding: 25px;
+        }
+        .card-title {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #007bff;
+        }
+        .card-text {
+            font-size: 1.1rem;
+        }
+        .btn-info, .btn-warning {
+            width: 100%;
+            margin-top: 10px;
+        }
+        .bg-success {
+            background-color: #28a745 !important;
+        }
+        .bg-success .text-white {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+        .alert {
+            font-size: 1.1rem;
+        }
+        /* Responsive styling */
+        @media (min-width: 768px) {
+            .btn-group {
+                justify-content: flex-start;
+            }
+        }
+    </style>
+    <script>
+        // Function to add fruit value to the search_query input field
+        function addFruitToSearch(fruit) {
+            var searchQuery = document.getElementsByName('search_query')[0];
+            if (!searchQuery.value) {
+                searchQuery.value = fruit;
+            } else {
+                searchQuery.value += ', ' + fruit;
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Fruit Set App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_fruit_set' %}">Add Fruit Set</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{% url 'search_fruit_set' %}">Search Fruit Sets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list_fruit_sets' %}">List View</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Search for a Fruit Set</h1>
+        <form method="GET" class="mb-4">
+            <div class="input-group shadow-sm">
+                <input type="text" class="form-control" name="search_query" placeholder="Enter a fruit name" required>
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+
+        <!-- Fruit buttons to quickly add fruits to the search query -->
+        <h2 class="text-center mb-3">Choose a Fruit</h2>
+        <div class="btn-group d-flex justify-content-center flex-wrap mb-4" role="group" aria-label="Fruit buttons">
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('kiwi')">Kiwi</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('strawberry')">Strawberry</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('orange')">Orange</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('tomato')">Tomato</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('lemon')">Lemon</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('watermelon')">Watermelon</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('grape')">Grape</button>
+            <button type="button" class="btn btn-outline-primary" onclick="addFruitToSearch('cherry')">Cherry</button>
+        </div>
+
+        <!-- Display search results in card boxes -->
+        {% if search_results %}
+            <div class="row">
+                {% for result in search_results %}
+                    <div class="btn-group d-flex justify-content-center flex-wrap mb-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <center><h5 class="card-title">Fruit Set</h5></center>
+                                <p class="card-text"><strong>Fruits:</strong> {{ result.fruit1 }}</p>
+
+                                <!-- Result shown in a green box -->
+                                <div class="bg-success text-white p-2 rounded">
+                                    <strong>Result:</strong> {{ result.result }}
+                                </div>
+                                <a href="{% url 'edit_fruit_set' result.id %}" class="btn btn-warning">Edit</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <!-- No matching sets found -->
+            <div class="alert alert-warning text-center" role="alert">
+                No matching fruit sets found. Please try searching for another fruit.
+            </div>
+        {% endif %}
+    </div>
+
+    <!-- Bootstrap JS (optional for interactive features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

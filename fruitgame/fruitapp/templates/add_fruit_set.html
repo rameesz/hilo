@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Fruit Set</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Premium design enhancements */
+        body {
+            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .navbar {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #333;
+        }
+
+        .container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 750px;
+            margin: 3rem auto;
+        }
+
+        h1, h2 {
+            font-weight: 700;
+            color: #444;
+        }
+
+        /* Premium button styles */
+        .btn-custom {
+            border: none;
+            color: #fff;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            margin: 5px;
+            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-custom-primary {
+            background-color: #5a67d8;
+        }
+
+        .btn-custom-primary:hover {
+            background-color: #4c51bf;
+        }
+
+        .btn-custom-warning {
+            background-color: #ff9800;
+        }
+
+        .btn-custom-warning:hover {
+            background-color: #e68900;
+        }
+
+        .btn-custom-success {
+            background-color: #38a169;
+        }
+
+        .btn-custom-success:hover {
+            background-color: #2f855a;
+        }
+
+        .form-control:focus {
+            border-color: #6c757d;
+            box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.25);
+        }
+
+        hr {
+            border: 0.5px solid #ddd;
+        }
+
+        /* Responsive button groups */
+        @media (max-width: 576px) {
+            .btn-group {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .btn-group .btn {
+                width: 100%; /* Make buttons full width */
+                font-size: 1.2rem; /* Increase font size */
+                padding: 0.8rem; /* Increase padding for larger buttons */
+                margin-bottom: 10px; /* Add more space between buttons */
+            }
+        }
+    </style>
+
+    <script>
+        // Function to add fruit value to the input field
+        function addFruitToField(fruit, fieldName) {
+            var field = document.getElementsByName(fieldName)[0];
+            if (!field.value) {
+                field.value = fruit;
+            } else {
+                field.value += ', ' + fruit;
+            }
+        }
+
+        // Function to reset the input field
+        function resetField(fieldName) {
+            document.getElementsByName(fieldName)[0].value = '';
+        }
+    </script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Fruit Set App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_fruit_set' %}">Add Fruit Set</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'search_fruit_set' %}">Search Fruit Sets</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'list_fruit_sets' %}">List View</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container mt-5">
+        <h1 class="mb-4 text-center">Add a New Fruit Set</h1>
+        
+        <form method="POST">
+            {% csrf_token %}
+            
+            <!-- Fruit 1 Section -->
+            <div class="mb-4">
+                <label for="fruit1" class="form-label">Fruit 1:</label>
+                <input type="text" class="form-control" name="fruit1" required readonly>
+            </div>
+
+            <h2 class="text-center">Choose a Fruit for Fruit 1</h2>
+            <div class="btn-group d-flex justify-content-center flex-wrap mb-4" role="group" aria-label="Fruit buttons for Fruit 1">
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('kiwi', 'fruit1')">Kiwi</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('strawberry', 'fruit1')">Strawberry</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('orange', 'fruit1')">Orange</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('tomato', 'fruit1')">Tomato</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('lemon', 'fruit1')">Lemon</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('watermelon', 'fruit1')">Watermelon</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('grape', 'fruit1')">Grape</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('cherry', 'fruit1')">Cherry</button>
+            </div>
+            <div class="text-center mt-3">
+                <button type="button" class="btn btn-custom btn-custom-warning" onclick="resetField('fruit1')">Reset Fruit 1</button>
+            </div>
+
+            <hr>
+
+            <!-- Result Section -->
+            <div class="mb-4">
+                <label for="result" class="form-label">Result:</label>
+                <input type="text" class="form-control" name="result" required readonly>
+            </div>
+
+            <h2 class="text-center">Choose a Fruit for Result</h2>
+            <div class="btn-group d-flex justify-content-center flex-wrap mb-4" role="group" aria-label="Fruit buttons for Result">
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('kiwi', 'result')">Kiwi</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('strawberry', 'result')">Strawberry</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('orange', 'result')">Orange</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('tomato', 'result')">Tomato</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('lemon', 'result')">Lemon</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('watermelon', 'result')">Watermelon</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('grape', 'result')">Grape</button>
+                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('cherry', 'result')">Cherry</button>
+            </div>
+
+            <div class="text-center mt-3">
+                <button type="button" class="btn btn-custom btn-custom-warning" onclick="resetField('result')">Reset Result</button>
+            </div>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-custom btn-custom-success">Submit</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (optional for interactive features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Fruit Set</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        // Function to add fruit value to the fruit1 input field
+        function addFruit(fruit) {
+            var fruit1 = document.getElementsByName('fruit1')[0];
+
+            // If there is already a value, append the new fruit with a comma
+            if (fruit1.value) {
+                fruit1.value += ', ' + fruit;  // Add fruit separated by a comma
+            } else {
+                fruit1.value = fruit;  // If empty, set the first fruit
+            }
+        }
+
+        // Function to reset the fruit input field
+        function resetFruit() {
+            document.getElementsByName('fruit1')[0].value = '';
+        }
+
+        // Function to append new result to the result field
+        function appendResult() {
+            var resultField = document.getElementsByName('result')[0];
+            var newResult = document.getElementById('new_result').value.trim();
+
+            if (newResult) {
+                if (resultField.value) {
+                    resultField.value += ', ' + newResult;  // Append new result to existing value
+                } else {
+                    resultField.value = newResult;  // If result field is empty, just add the new result
+                }
+                document.getElementById('new_result').value = '';  // Clear input after appending
+            } else {
+                alert('Please enter a new result to add.');
+            }
+        }
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Fruit Set App</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'add_fruit_set' %}">Add Fruit Set</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'search_fruit_set' %}">Search Fruit Sets</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main content -->
+    <div class="container mt-4">
+        <h1 class="mb-4">Edit Fruit Set</h1>
+
+        <form method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="fruit1" class="form-label">Fruit 1:</label>
+                <input type="text" class="form-control" name="fruit1" value="{{ fruit_set.fruit1 }}" readonly>
+            </div>
+
+            <!-- Add buttons to update fruit1 field -->
+            <h2>Select a Fruit</h2>
+            <div class="btn-group mb-3" role="group" aria-label="Fruit buttons">
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Apple')">Apple</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Banana')">Banana</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Cherry')">Cherry</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Grape')">Grape</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Kiwi')">Kiwi</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Lemon')">Lemon</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Orange')">Orange</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Strawberry')">Strawberry</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruit('Mango')">Mango</button> <!-- New Fruit -->
+            </div>
+
+            <!-- Reset fruit button -->
+            <div class="mb-3">
+                <button type="button" class="btn btn-warning" onclick="resetFruit()">Reset Fruit</button>
+            </div>
+
+            <div class="mb-3">
+                <label for="result" class="form-label">Result:</label>
+                <input type="text" class="form-control" name="result" value="{{ fruit_set.result }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label for="new_result" class="form-label">Add to Result:</label>
+                <input type="text" class="form-control" id="new_result" placeholder="Enter new result to add">
+                <button type="button" class="btn btn-primary mt-2" onclick="appendResult()">Add to Result</button>
+            </div>
+
+            <div>
+                <button type="submit" class="btn btn-success">Update</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS (optional for interactive features) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
