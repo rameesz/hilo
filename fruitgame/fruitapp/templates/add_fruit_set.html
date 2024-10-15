@@ -33,17 +33,7 @@
         }
 
         /* Premium button styles */
-        .btn-custom {
-            border: none;
-            color: #fff;
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding: 0.6rem 1.5rem;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-            margin: 5px;
-            box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-        }
+    
 
         .btn-custom-primary {
             background-color: #5a67d8;
@@ -78,18 +68,20 @@
             border: 0.5px solid #ddd;
         }
 
-        /* Responsive button groups */
-        @media (max-width: 576px) {
-            .btn-group {
-                display: flex;
-                flex-direction: column;
-            }
+        .btn-group button {
+            min-width: 120px;
+            margin: 5px;
+        }
 
-            .btn-group .btn {
-                width: 100%; /* Make buttons full width */
-                font-size: 1.2rem; /* Increase font size */
-                padding: 0.8rem; /* Increase padding for larger buttons */
-                margin-bottom: 10px; /* Add more space between buttons */
+        .btn-info, .btn-warning {
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        /* Responsive button groups */
+        @media (min-width: 768px) {
+            .btn-group {
+                justify-content: flex-start;
             }
         }
     </style>
@@ -151,14 +143,14 @@
 
             <h2 class="text-center">Choose a Fruit for Fruit 1</h2>
             <div class="btn-group d-flex justify-content-center flex-wrap mb-4" role="group" aria-label="Fruit buttons for Fruit 1">
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('kiwi', 'fruit1')">Kiwi</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('strawberry', 'fruit1')">Strawberry</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('orange', 'fruit1')">Orange</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('tomato', 'fruit1')">Tomato</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('lemon', 'fruit1')">Lemon</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('watermelon', 'fruit1')">Watermelon</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('grape', 'fruit1')">Grape</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('cherry', 'fruit1')">Cherry</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('kiwi', 'fruit1')">Kiwi</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('strawberry', 'fruit1')">Strawberry</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('orange', 'fruit1')">Orange</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('tomato', 'fruit1')">Tomato</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('lemon', 'fruit1')">Lemon</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('watermelon', 'fruit1')">Watermelon</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('grape', 'fruit1')">Grape</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('cherry', 'fruit1')">Cherry</button>
             </div>
             <div class="text-center mt-3">
                 <button type="button" class="btn btn-custom btn-custom-warning" onclick="resetField('fruit1')">Reset Fruit 1</button>
@@ -174,14 +166,14 @@
 
             <h2 class="text-center">Choose a Fruit for Result</h2>
             <div class="btn-group d-flex justify-content-center flex-wrap mb-4" role="group" aria-label="Fruit buttons for Result">
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('kiwi', 'result')">Kiwi</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('strawberry', 'result')">Strawberry</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('orange', 'result')">Orange</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('tomato', 'result')">Tomato</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('lemon', 'result')">Lemon</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('watermelon', 'result')">Watermelon</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('grape', 'result')">Grape</button>
-                <button type="button" class="btn btn-custom btn-custom-primary" onclick="addFruitToField('cherry', 'result')">Cherry</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('kiwi', 'result')">Kiwi</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('strawberry', 'result')">Strawberry</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('orange', 'result')">Orange</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('tomato', 'result')">Tomato</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('lemon', 'result')">Lemon</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('watermelon', 'result')">Watermelon</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('grape', 'result')">Grape</button>
+                <button type="button" class="btn btn-outline-primary" onclick="addFruitToField('cherry', 'result')">Cherry</button>
             </div>
 
             <div class="text-center mt-3">
